@@ -1,10 +1,16 @@
-import Home from "./pages/Home/Home";
+import Auth from "./pages/Auth/Auth";
+import Welcome from "./pages/Welcome/Welcome";
 
 const routes = [
 	{
 		text: "Главная",
-		path: "/",
-		element: <Home />,
+		path: "/welcome",
+		element: <Welcome />,
+	},
+	{
+		text: "Авторизация",
+		path: "/auth",
+		element: <Auth />,
 	},
 ];
 

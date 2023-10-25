@@ -1,3 +1,88 @@
+@import './vars';
+
 .wrapper {
 	height: 100%;
+	background-color: #30323A;
+	overflow: hidden;
+}
+
+.text {
+	font-size: 16px;
+	line-height: 1.5;
+	color: $gray;
+
+	&_center {
+		text-align: center;
+	}
+
+	p {
+		margin: 12px 0 0 0;
+
+		&:first-child {
+			margin: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		font-size: 14px;
+	}
+
+	@media (max-width: 525px) {
+		font-size: 12px;
+	}
+}
+
+.button {
+	border-radius: 8px;
+	background-color: $red;
+	color: #fff;
+	font-weight: 600;
+	font-size: 16px;
+	height: 44px;
+	padding: 0 18px;
+	transition: 350ms;
+
+	&:hover {
+		@media #{$mouse-device} {
+			background-color: $pink;
+			color: $black;
+		}
+	}
+
+	&:disabled {
+		pointer-events: none;
+		opacity: 0.55;
+		scale: 0.95;
+	}
+
+	&:active {
+		scale: 0.95;
+	}
+
+	@media (max-width: 768px) {
+		font-size: 14px;
+		height: 36px;
+		padding: 0 12px;
+		border-radius: 6px;
+	}
+}
+
+.input {
+	width: 270px;
+
+	&__field {
+		width: 100%;
+		border: 1px solid #fff;
+		background-color: $black;
+		color: #fff;
+		font-weight: 600;
+		transition: 350ms;
+		height: 40px;
+		padding: 0 12px;
+
+		&::placeholder {
+			font-weight: 400;
+			color: #9397A5;
+		}
+	}
 }
