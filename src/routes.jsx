@@ -1,5 +1,6 @@
 import Auth from "./pages/Auth/Auth";
 import Welcome from "./pages/Welcome/Welcome";
+import Introduction from "./pages/Introduction/Introduction";
 
 const routes = [
 	{
@@ -11,6 +12,11 @@ const routes = [
 		text: "Авторизация",
 		path: "/auth",
 		element: <Auth />,
+	},
+	{
+		text: "Вступление",
+		path: "/introduction",
+		element: <Introduction />,
 	},
 ];
 

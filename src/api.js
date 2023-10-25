@@ -22,7 +22,7 @@ const api = async (method, body = {}, signal) => {
 	}
 
 	const response = await fetch(
-		`https://api.jsonbin.io/v3/b/64fe534a8d92e126ae6a12f7${method === "GET" ? "/latest" : ""}`,
+		`https://api.jsonbin.io/v3/b/6538e89812a5d37659904bbf${method === "GET" ? "/latest" : ""}`,
 		options
 	);
 	return await response.json();

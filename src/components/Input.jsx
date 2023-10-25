@@ -4,6 +4,7 @@ const Input = ({ value, onChange, type, placeholder }) => {
 			<input
 				value={value}
 				onChange={(event) => onChange(event.target.value)}
+				autoComplete="on"
 				type={type}
 				placeholder={placeholder}
 				className="input__field"

@@ -17,6 +17,7 @@
 .auth {
 	display: flex;
 	flex-direction: column;
+	position: relative;
 	gap: 20px;
 
 	&__title {
@@ -31,6 +32,18 @@
 		height: 2px;
 		background-color: $gray;
 		align-self: center;
+	}
+
+	.loader {
+		position: absolute;
+		top: -5px;
+		left: -5px;
+		width: calc(100% + 10px);
+		height: calc(100% + 10px);
+		backdrop-filter: blur(2px);
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 }
 
@@ -53,6 +66,13 @@
 
 	&__change {
 		color: #fff;
+	}
+
+	&__error {
+		color: $red;
+		font-size: 12px;
+		line-height: 1.25;
+		font-weight: 600;
 	}
 
 	&__link {
