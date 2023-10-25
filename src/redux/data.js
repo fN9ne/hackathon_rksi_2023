@@ -4,17 +4,17 @@ const dataSlice = createSlice({
 	name: "data",
 	initialState: {
 		users: [],
-		teams: [],
+		boards: [],
 	},
 	reducers: {
 		setUsers(state, action) {
 			state.users = action.payload;
 		},
-		setTeams(state, action) {
-			state.teams = action.payload;
+		setBoards(state, action) {
+			state.boards = action.payload;
 		},
 	},
 });
 
-export const { setUsers, setTeams } = dataSlice.actions;
+export const { setUsers, setBoards } = dataSlice.actions;
 export default dataSlice.reducer;

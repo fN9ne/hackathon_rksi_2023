@@ -3,7 +3,7 @@ import Board from "./pages/Board/Board";
 const appRoutes = [
 	{
 		text: "Доска",
-		path: "board",
+		path: "board:boardname",
 		element: <Board />,
 	},
 ];

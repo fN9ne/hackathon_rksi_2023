@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
 import api from "../../../api";
-import { useNavigate } from "react-router-dom";
 import { setUser } from "../../../redux/user";
 
 const SignUp = ({}) => {
@@ -22,7 +21,6 @@ const SignUp = ({}) => {
 	const [error, setError] = useState("");
 
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const swapWindow = (event) => {
 		event.preventDefault();
@@ -68,9 +66,6 @@ const SignUp = ({}) => {
 							.then(() => setFetching(false))
 							.then(() => {
 								dispatch(setUser({ firstName: firstName, lastName: lastName, username: username, teams: [] }));
-							})
-							.then(() => {
-								navigate("/introduction");
 							});
 					}
 				});

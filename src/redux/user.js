@@ -4,7 +4,7 @@ const initialState = {
 	firstName: null,
 	lastName: null,
 	username: null,
-	teams: [],
+	role: null,
 };
 
 const userSlice = createSlice({

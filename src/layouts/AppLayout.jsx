@@ -5,7 +5,7 @@ import AnimatePage from "../components/AnimatePage";
 
 const AppLayout = () => {
 	return (
-		<AnimatePage>
+		<AnimatePage className="app">
 			<Sidebar />
 			<div className="body">
 				<Outlet />

@@ -1,0 +1,50 @@
+@import '../../scss/vars';
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.5);
+	overflow: auto;
+	overscroll-behavior: contain;
+
+	&__body {
+		padding: 10px;
+		min-height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__content {
+		max-width: 320px;
+		min-height: 100px;
+		width: 100%;
+		background-color: $black;
+		border: 1px solid #fff;
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.text {
+			margin: 12px 0 0 0;
+		}
+	}
+
+	&__title {
+		font-size: 30px;
+		color: #fff;
+	}
+
+	&__footer {
+		width: 100%;
+		margin: 24px 0 0 0;
+		display: flex;
+		gap: 20px;
+		justify-content: center;
+	}
+}

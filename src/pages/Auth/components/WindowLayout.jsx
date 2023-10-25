@@ -3,7 +3,7 @@ import Loader from "../../../components/Loader/Loader";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacity } from "../../../animations";
 
-const WindowLayout = ({ error, fetching, onSubmit, isFormValid, title, text, swapWindow, children }) => {
+const WindowLayout = ({ error, fetching, onSubmit, isFormValid, title, text, children }) => {
 	return (
 		<div className="auth">
 			<h2 className="auth__title">{title}</h2>
@@ -17,12 +17,6 @@ const WindowLayout = ({ error, fetching, onSubmit, isFormValid, title, text, swa
 					<button disabled={!isFormValid} type="submit" className="button">
 						{text.submit}
 					</button>
-					<div className="auth-form__change">
-						{text.change}
-						<a className="auth-form__link" href="#swapWindow" onClick={swapWindow}>
-							{text.link}
-						</a>
-					</div>
 				</div>
 			</form>
 			<AnimatePresence>

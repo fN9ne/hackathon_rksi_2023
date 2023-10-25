@@ -17,6 +17,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { opacity } from "../../../animations";
 import { useNavigate } from "react-router-dom";
 
+import { board } from "../../../instances";
+
 const Screen3 = () => {
 	const [fetching, setFetching] = useState(false);
 
@@ -24,7 +26,7 @@ const Screen3 = () => {
 	const navigate = useNavigate();
 
 	const { users } = useSelector((state) => state.data);
-	const { members, team } = useSelector((state) => state.intro);
+	const { members, team, project } = useSelector((state) => state.intro);
 	const { username } = useSelector((state) => state.user);
 
 	const finish = () => {
@@ -46,7 +48,7 @@ const Screen3 = () => {
 					...teams,
 					{
 						name: team,
-						projects: [],
+						boards: [board(project)],
 					},
 				],
 			};

@@ -12,14 +12,22 @@ import { AnimatePresence, motion } from "framer-motion";
 import { slide } from "../../animations";
 import Screen2 from "./components/Screen2";
 import Screen3 from "./components/Screen3";
+import { useNavigate } from "react-router-dom";
 
 const Introduction = () => {
-	const { project, team, members, screen } = useSelector((state) => state.intro);
+	const { teams } = useSelector((state) => state.user);
+	const { screen } = useSelector((state) => state.intro);
+
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(setScreen(1));
 	}, []);
+
+	useEffect(() => {
+		if (teams.length !== 0) navigate("/app/board");
+	}, [teams]);
 
 	return (
 		<AnimatePage className="intro">

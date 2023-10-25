@@ -29,7 +29,7 @@ const Screen2 = () => {
 			<div className="intro-screen__body">
 				<Input type="text" placeholder=" Название команды" value={team || ""} onChange={(value) => dispatch(setTeam(value))} />
 			</div>
-			{error.length && <div className="intro-screen__error">{error}</div>}
+			{error.length ? <div className="intro-screen__error">{error}</div> : null}
 			<div className="intro-screen__footer">
 				<Back />
 				<Continue disabled={team ? (team.length < 2 ? true : error.length ? true : false) : true} />
