@@ -13,6 +13,10 @@
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 
+### :writing_hand: Дизайн приложения:
+
+[![Figma banner](/public/figmabanner.png)](https://www.figma.com/file/oUPOyU2rSUPy0vWEPOb4kz/Hackathon?type=design&mode=design&t=RKXufjGiZa58Gm5J-1)
+
 ### :briefcase: Ссылка на Production:
 
 [![Production](/public/productionbanner.svg)](https://hackathon-rksi-2023.vercel.app)
