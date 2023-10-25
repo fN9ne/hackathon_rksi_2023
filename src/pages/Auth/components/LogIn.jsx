@@ -56,7 +56,7 @@ const LogIn = ({}) => {
 							})
 						);
 						setFetching(false);
-						navigate("/board");
+						navigate("/app/board");
 					}
 				});
 		}

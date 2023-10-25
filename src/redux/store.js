@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
 import authReducer from "./auth";
 import userReducer from "./user";
-import usersReducer from "./users";
+import dataReducer from "./data";
 import introReducer from "./intro";
 
 const store = configureStore({
@@ -10,7 +10,7 @@ const store = configureStore({
 		auth: authReducer,
 		user: userReducer,
 		intro: introReducer,
-		users: usersReducer,
+		data: dataReducer,
 	}),
 });
 

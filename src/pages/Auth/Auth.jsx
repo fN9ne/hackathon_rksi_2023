@@ -7,9 +7,21 @@ import { AnimatePresence, motion } from "framer-motion";
 import SignUp from "./components/SignUp";
 import { slide } from "../../animations";
 import LogIn from "./components/LogIn";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
 	const { signUpActive, logInActive } = useSelector((state) => state.auth);
+
+	const { username } = useSelector((state) => state.user);
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (username) {
+			navigate("/app/board");
+		}
+	}, [username]);
 
 	return (
 		<AnimatePage className="authpage">

@@ -19,6 +19,13 @@
 	width: 100%;
 	position: relative;
 
+	&__error {
+		margin: 12px 0 0 0;
+		color: $red;
+		font-weight: 600;
+		text-align: left;
+	}
+
 	.loader {
 		width: calc(100% + 10px);
 		height: calc(100% + 10px);

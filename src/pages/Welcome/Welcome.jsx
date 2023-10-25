@@ -1,10 +1,18 @@
+import { useEffect } from "react";
 import AnimatePage from "../../components/AnimatePage";
 import "./Welcome.scss";
 
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Welcome = () => {
 	const navigate = useNavigate();
+
+	const { username } = useSelector((state) => state.user);
+
+	useEffect(() => {
+		if (username) navigate("/app/board");
+	}, [username]);
 
 	return (
 		<AnimatePage className="welcomepage">

@@ -23,7 +23,7 @@ const Screen3 = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const { users } = useSelector((state) => state.users);
+	const { users } = useSelector((state) => state.data);
 	const { members, team } = useSelector((state) => state.intro);
 	const { username } = useSelector((state) => state.user);
 
@@ -36,18 +36,24 @@ const Screen3 = () => {
 
 			const body = {
 				...result,
-				users: users.map((user) => {
+				users: result.users.map((user) => {
 					if (user.username === username || members.map((member) => member.username).includes(user.username)) {
 						return { ...user, teams: [...user.teams, team] };
 					}
 					return user;
 				}),
-				teams: [...teams, team],
+				teams: [
+					...teams,
+					{
+						name: team,
+						projects: [],
+					},
+				],
 			};
 
 			api("PUT", body)
 				.then(() => setFetching(false))
-				.then(() => navigate("/board"));
+				.then(() => navigate("/app/board"));
 		});
 	};
 
