@@ -4,11 +4,53 @@
 	height: 100%;
 	position: relative;
 
+	&__room {
+		display: flex;
+		gap: 44px;
+		margin: 0 0 32px 0;
+	}
+
+	&__roomnamesub {
+		color: $gray;
+		font-size: 18px;
+		font-weight: 600;
+	}
+
+	&__roomhead {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	&__roomname {
+		color: #fff;
+		font-size: 44px;
+	}
+
 	&__container {
 		padding: 24px;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
+
+		.loader {
+			scale: 1;
+			top: 0;
+			left: 0;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			translate: 0;
+			backdrop-filter: blur(2px);
+			z-index: 10;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&__content {
+				scale: 2;
+			}
+		}
 	}
 
 	&__content {
@@ -23,6 +65,26 @@
 		top: 50%;
 		left: 50%;
 		translate: -50% -50%;
+	}
+
+	&__remove {
+		align-self: flex-end;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		svg path {
+			fill: #fff;
+			transition: 350ms;
+		}
+
+		&:hover {
+			@media #{$mouse-device} {
+				svg path {
+					fill: $black;
+				}
+			}
+		}
 	}
 }
 

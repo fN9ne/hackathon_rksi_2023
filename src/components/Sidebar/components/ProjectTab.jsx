@@ -13,8 +13,8 @@ const ProjectTab = () => {
 	return (
 		<TabContent condition={projects}>
 			<div className="tab-content__header">
-				<h2 className="tab-content__title">Проекты</h2>
-				{role === "admin" && <div className="tab-content__newproject">+</div>}
+				<h2 className="tab-content__title">Проект</h2>
+				{/* {role === "admin" && <div className="tab-content__newproject">+</div>} */}
 			</div>
 			<div className="tab-content__main">
 				<ul className="tab-content__list">

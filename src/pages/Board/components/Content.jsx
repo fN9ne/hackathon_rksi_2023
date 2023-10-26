@@ -15,6 +15,10 @@ import Calendar from "react-calendar";
 import { changeCol, createNewTask, editTask, removeTask, setTask } from "../../../redux/board";
 import api from "../../../api";
 import { setTaskVisibility } from "../../../redux/modals";
+import DeleteIcon from "../../../assets/icons/delete.svg?react";
+import Loader from "../../../components/Loader/Loader";
+import { setActiveRoom } from "../../../redux/sidebar";
+import { setBoards } from "../../../redux/data";
 
 const Content = () => {
 	const { activeProject, activeRoom } = useSelector((state) => state.sidebar);
@@ -31,11 +35,57 @@ const Content = () => {
 		}
 	}, [activeProject, activeRoom, data]);
 
-	console.log(board);
+	const [fetching, setFetching] = useState(false);
+
+	const removeRoom = () => {
+		setFetching(true);
+		api("GET").then((response) => {
+			const result = response.record;
+
+			const body = {
+				...result,
+				boards: result.boards.map((board) => {
+					if (board.name === data.name) {
+						return {
+							...board,
+							rooms: board.rooms.filter((room) => room.name !== activeRoom),
+						};
+					}
+
+					return board;
+				}),
+			};
+
+			console.log(body.boards[0].rooms[0]); // HOT_FIXES: если надо будет всё-таки делать проекты отдельные, то вот это меняй
+			api("PUT", body).then(() => {
+				setActiveRoom(body.boards[0].rooms[0].name);
+				setBoards(body.boards);
+				setFetching(false);
+			});
+		});
+	};
 
 	return (
 		<>
-			{role === "admin" && board.rooms.length > 1 ? "Удалить комнату" : null}
+			<AnimatePresence>
+				{fetching && (
+					<motion.div className="loader" {...opacity}>
+						<Loader />
+					</motion.div>
+				)}
+			</AnimatePresence>
+			{role === "admin" && board.rooms.length > 1 ? (
+				<div className="board__room">
+					<div className="board__roomhead">
+						<h3 className="board__roomnamesub">Текущая комната: </h3>
+						<h2 className="board__roomname">{activeRoom}</h2>
+					</div>
+					<button onClick={removeRoom} className="button board__remove">
+						<DeleteIcon />
+						<span>Удалить комнату</span>
+					</button>
+				</div>
+			) : null}
 			<div className="board__content">
 				{currentBoard.content.map((column, index) => (
 					<Column room={currentBoard.name} data={column} key={index} />

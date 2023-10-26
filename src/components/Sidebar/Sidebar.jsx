@@ -23,7 +23,7 @@ const Sidebar = () => {
 
 	const tabs = [
 		{
-			title: "Проекты",
+			title: "Проект",
 			icon: <ProjectIcon />,
 			tag: "projects",
 			onClick: () => dispatch(setProjectTabVisibility(!sidebarState.projects)),
