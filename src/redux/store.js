@@ -6,6 +6,7 @@ import introReducer from "./intro";
 import modalsReducer from "./modals";
 import sidebarReducer from "./sidebar";
 import boardReducer from "./board";
+import mailerReducer from "./mailer";
 
 const store = configureStore({
 	reducer: combineReducers({
@@ -15,6 +16,7 @@ const store = configureStore({
 		modals: modalsReducer,
 		sidebar: sidebarReducer,
 		board: boardReducer,
+		mailer: mailerReducer,
 	}),
 });
 

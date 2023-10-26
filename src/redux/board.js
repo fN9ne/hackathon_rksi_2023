@@ -6,8 +6,12 @@ const boardSlice = createSlice({
 	initialState: {
 		data: [],
 		task: {},
+		save: false,
 	},
 	reducers: {
+		setSave(state, action) {
+			state.save = action.payload;
+		},
 		setTask(state, action) {
 			state.task = action.payload;
 		},
@@ -159,5 +163,6 @@ const boardSlice = createSlice({
 	},
 });
 
-export const { setData, changeName, createNewTask, editTask, removeTask, changeCol, setTask, clearTask } = boardSlice.actions;
+export const { setData, setSave, changeName, createNewTask, editTask, removeTask, changeCol, setTask, clearTask } =
+	boardSlice.actions;
 export default boardSlice.reducer;

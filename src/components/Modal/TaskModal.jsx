@@ -12,7 +12,7 @@ import StatusIcon from "../../assets/icons/status.svg?react";
 import WeightIcon from "../../assets/icons/weight.svg?react";
 import PriorityIcon from "../../assets/icons/priority.svg?react";
 import ExecutorIcon from "../../assets/icons/executor.svg?react";
-import { clearTask, setTask } from "../../redux/board";
+import { clearTask, setSave, setTask } from "../../redux/board";
 import api from "../../api";
 import { setBoards } from "../../redux/data";
 import Loader from "../Loader/Loader";
@@ -99,6 +99,7 @@ const TaskModal = ({ task }) => {
 					dispatch(setTaskVisibility(false));
 					dispatch(clearTask());
 					dispatch(setBoards(body.boards));
+					dispatch(setSave(true));
 					setFetching(false);
 				});
 		});

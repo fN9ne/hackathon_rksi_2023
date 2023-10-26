@@ -12,7 +12,7 @@ import { date, getMonthName } from "../../../functions";
 import { useEffect, useRef, useState } from "react";
 import DateTimePicker from "react-datetime-picker";
 import Calendar from "react-calendar";
-import { changeCol, createNewTask, editTask, removeTask, setTask } from "../../../redux/board";
+import { changeCol, createNewTask, editTask, removeTask, setSave, setTask } from "../../../redux/board";
 import api from "../../../api";
 import { setTaskVisibility } from "../../../redux/modals";
 import DeleteIcon from "../../../assets/icons/delete.svg?react";
@@ -82,61 +82,63 @@ const Content = () => {
 					</motion.div>
 				)}
 			</AnimatePresence>
-			{role === "admin" ? (
-				<div className="board__room">
-					<form
-						onSubmit={(event) => {
-							event.preventDefault();
+			<div className="board__room">
+				<form
+					onSubmit={(event) => {
+						event.preventDefault();
 
-							api("GET")
-								.then((response) => {
-									const result = response.record;
-									return result;
-								})
-								.then((response) => {
-									dispatch(setActiveRoom(roomName));
+						api("GET")
+							.then((response) => {
+								const result = response.record;
+								return result;
+							})
+							.then((response) => {
+								dispatch(setActiveRoom(roomName));
 
-									const body = {
-										...response,
-										boards: response.boards.map((board) => {
-											if (board.name === activeProject) {
-												return {
-													...board,
-													rooms: board.rooms.map((room) => {
-														if (room.name === activeRoom) {
-															return { ...room, name: roomName };
-														}
-														return room;
-													}),
-												};
-											}
-											return board;
-										}),
-									};
+								const body = {
+									...response,
+									boards: response.boards.map((board) => {
+										if (board.name === activeProject) {
+											return {
+												...board,
+												rooms: board.rooms.map((room) => {
+													if (room.name === activeRoom) {
+														return { ...room, name: roomName };
+													}
+													return room;
+												}),
+											};
+										}
+										return board;
+									}),
+								};
 
-									dispatch(setBoards(body.boards));
+								dispatch(setBoards(body.boards));
 
-									api("PUT", body).then(() => console.log("Название команты изменено успешно!"));
-								});
-						}}
-						className="board__roomhead"
-					>
-						<h3 className="board__roomnamesub">Текущая комната: </h3>
+								api("PUT", body).then(() => console.log("Название команты изменено успешно!"));
+							});
+					}}
+					className="board__roomhead"
+				>
+					<h3 className="board__roomnamesub">Текущая комната: </h3>
+					{role === "admin" ? (
 						<input
 							type="text"
 							className="board__roomname"
 							value={roomName}
 							onChange={(event) => setRoomName(event.target.value)}
 						/>
-					</form>
-					{board.rooms.length > 1 && (
-						<button onClick={removeRoom} className="button board__remove">
-							<DeleteIcon />
-							<span>Удалить комнату</span>
-						</button>
+					) : (
+						<div className="board__roomname">{roomName}</div>
 					)}
-				</div>
-			) : null}
+				</form>
+				{role === "admin" && board.rooms.length > 1 && (
+					<button onClick={removeRoom} className="button board__remove">
+						<DeleteIcon />
+						<span>Удалить комнату</span>
+					</button>
+				)}
+			</div>
 			<div className="board__content">
 				{currentBoard.content.map((column, index) => (
 					<Column room={currentBoard.name} data={column} key={index} />
@@ -264,12 +266,14 @@ const Task = ({ room, data, task, setSend }) => {
 
 	return (
 		<li
-			className={`board-task board-task_${task.priority} board-task_${task.weight}`}
+			className={`board-task board-task_${task.priority} board-task_${task.weight}${task.new ? " board-task_new" : ""}`}
 			onClick={(event) => {
 				if (!event.target.closest(".board-task-datepicker")) setDeadlineActive(false);
 				if (!event.target.closest(".board-task-more-content, .board-task__more")) setMoreActive(false);
-				dispatch(setTask({ ...task, board: boardName.name, room: room, oldStatus: task.status }));
-				dispatch(setTaskVisibility(true));
+				if (!task.new) {
+					dispatch(setTask({ ...task, board: boardName.name, room: room, oldStatus: task.status }));
+					dispatch(setTaskVisibility(true));
+				}
 			}}
 		>
 			<div className="board-task__header">
@@ -441,6 +445,7 @@ const Task = ({ room, data, task, setSend }) => {
 										},
 									})
 								);
+								dispatch(setSave(true));
 								setSend(true);
 							}}
 							className="board-task__create"
