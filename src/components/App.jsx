@@ -107,7 +107,7 @@ const App = () => {
 		if (ftUser) {
 			dispatch(setUser(JSON.parse(ftUser)));
 		} else {
-			navigate("/");
+			navigate("/welcome");
 		}
 
 		api("GET").then((response) => {
