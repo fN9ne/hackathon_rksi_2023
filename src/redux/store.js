@@ -5,6 +5,7 @@ import dataReducer from "./data";
 import introReducer from "./intro";
 import modalsReducer from "./modals";
 import sidebarReducer from "./sidebar";
+import boardReducer from "./board";
 
 const store = configureStore({
 	reducer: combineReducers({
@@ -13,6 +14,7 @@ const store = configureStore({
 		data: dataReducer,
 		modals: modalsReducer,
 		sidebar: sidebarReducer,
+		board: boardReducer,
 	}),
 });
 

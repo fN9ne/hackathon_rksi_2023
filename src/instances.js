@@ -1,3 +1,5 @@
+import { date } from "./functions";
+
 export const board = ({ project }) => {
 	return {
 		name: project,
@@ -10,13 +12,43 @@ export const board = ({ project }) => {
 export const room = (name) => {
 	return {
 		name: name,
-		content: [column("Нужно сделать"), column("Нужно исправить"), column("В процессе"), column("Выполнено")],
+		content: [
+			column("todo", "Нужно сделать"),
+			column("fix", "Нужно исправить"),
+			column("progress", "В процессе"),
+			column("complete", "Выполнено"),
+		],
 	};
 };
 
-export const column = (name) => {
+export const column = (tag, name) => {
 	return {
 		name: name,
+		tag: tag,
 		tasks: [],
+	};
+};
+
+export const task = ({
+	status = null,
+	name = null,
+	desc = null,
+	deadline = null,
+	deadlineFormat = null,
+	createDate = date(new Date(), false, true),
+	creator,
+	priority = "medium",
+	executors = [],
+}) => {
+	return {
+		status: status,
+		name: name,
+		desc: desc,
+		deadline: deadline,
+		deadlineFormat: deadlineFormat,
+		createDate: createDate,
+		creator: creator,
+		priority: priority,
+		executors: executors,
 	};
 };

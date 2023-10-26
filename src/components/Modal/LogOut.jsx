@@ -20,7 +20,7 @@ const LogOut = () => {
 	};
 
 	return (
-		<ModalLayout condition={logOutActive}>
+		<ModalLayout close={closeModal} condition={logOutActive}>
 			<Title text="Выход" />
 			<div className="text">Вы уверены, что хотите выйти?</div>
 			<div className="modal__footer">

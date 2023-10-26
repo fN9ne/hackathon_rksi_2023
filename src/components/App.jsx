@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { Routes, Route, useLocation, Navigate, useNavigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import api from "../api";
@@ -16,6 +16,7 @@ import { setUser } from "../redux/user";
 
 import Board from "../pages/Board/Board";
 import { setActiveProject, setActiveRoom } from "../redux/sidebar";
+import { setData } from "../redux/board";
 
 const App = () => {
 	const location = useLocation();
@@ -23,6 +24,9 @@ const App = () => {
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	const { activeProject } = useSelector((state) => state.sidebar);
+	const { boards } = useSelector((state) => state.data);
 
 	useEffect(() => {
 		const ftUser = localStorage.getItem("ft_user");
@@ -39,8 +43,15 @@ const App = () => {
 			dispatch(setBoards(result.boards));
 			dispatch(setActiveProject(result.boards[0].name));
 			dispatch(setActiveRoom(result.boards[0].rooms[0].name));
+			dispatch(setData(result.boards[0]));
 		});
 	}, []);
+
+	useEffect(() => {
+		if (boards.length > 0 && activeProject) {
+			dispatch(setData(boards.filter((board) => board.name === activeProject)[0]));
+		}
+	}, [boards, activeProject]);
 
 	return (
 		<>

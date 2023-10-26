@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "../../../assets/icons/edit.svg?react";
 import { useRef, useState } from "react";
 import api from "../../../api";
+import { setActiveRoom } from "../../../redux/sidebar";
+import { setBoards } from "../../../redux/data";
 
 const RoomTab = () => {
 	const { rooms, activeRoom, activeProject } = useSelector((state) => state.sidebar);
@@ -43,6 +45,8 @@ const Item = ({ room, activeRoom }) => {
 	const [readOnly, setReadOnly] = useState(true);
 	const [value, setValue] = useState(room.name);
 
+	const dispatch = useDispatch();
+
 	const ref = useRef();
 
 	const { rooms, activeProject } = useSelector((state) => state.sidebar);
@@ -63,25 +67,27 @@ const Item = ({ room, activeRoom }) => {
 						return result;
 					})
 					.then((response) => {
-						const board = response.boards.filter((board) => board.name === activeProject)[0];
-						const room = board.rooms.filter((room) => room.name === activeRoom)[0];
+						dispatch(setActiveRoom(value));
 
 						const body = {
 							...response,
-							boards: [
-								...response.boards.filter((board) => board.name !== activeProject),
-								{
-									...board,
-									rooms: [
-										...board.rooms.filter((room) => room.name !== activeRoom),
-										{
-											...room,
-											name: value,
-										},
-									],
-								},
-							],
+							boards: response.boards.map((board) => {
+								if (board.name === activeProject) {
+									return {
+										...board,
+										rooms: board.rooms.map((room) => {
+											if (room.name === activeRoom) {
+												return { ...room, name: value };
+											}
+											return room;
+										}),
+									};
+								}
+								return board;
+							}),
 						};
+
+						dispatch(setBoards(body.boards));
 
 						api("PUT", body).then(() => console.log("Название команты изменено успешно!"));
 					});

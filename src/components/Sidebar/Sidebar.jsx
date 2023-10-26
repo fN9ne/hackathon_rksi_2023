@@ -22,9 +22,14 @@ const Sidebar = () => {
 	const sidebarState = useSelector((state) => state.sidebar);
 
 	const tabs = [
-		{ icon: <ProjectIcon />, tag: "projects", onClick: () => dispatch(setProjectTabVisibility(!sidebarState.projects)) },
-		{ icon: <RoomsIcon />, tag: "rooms", onClick: () => dispatch(setRoomsTabVisibility(!sidebarState.rooms)) },
-		{ icon: <AdminIcon />, admin: true, onClick: () => navigate("/app/admin") },
+		{
+			title: "Проекты",
+			icon: <ProjectIcon />,
+			tag: "projects",
+			onClick: () => dispatch(setProjectTabVisibility(!sidebarState.projects)),
+		},
+		{ title: "Комнаты", icon: <RoomsIcon />, tag: "rooms", onClick: () => dispatch(setRoomsTabVisibility(!sidebarState.rooms)) },
+		{ title: "Панель администратора", icon: <AdminIcon />, admin: true, onClick: () => navigate("/app/admin") },
 	];
 
 	const isTabActive = (tab, state) => {
@@ -47,6 +52,7 @@ const Sidebar = () => {
 				<ul className="sidebar__tabs">
 					{filteredTabs.map((tab, index) => (
 						<li
+							title={tab.title}
 							key={index}
 							onClick={() => {
 								dispatch(closeAll());
@@ -59,7 +65,7 @@ const Sidebar = () => {
 					))}
 				</ul>
 				<div className="sidebar__logout">
-					<button onClick={openLogOutModal} className="sidebar-item sidebar-item__logout">
+					<button title="Выйти" onClick={openLogOutModal} className="sidebar-item sidebar-item__logout">
 						<LogoutIcon />
 					</button>
 				</div>

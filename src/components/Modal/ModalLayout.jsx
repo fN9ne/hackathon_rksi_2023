@@ -4,11 +4,17 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { opacity, slide } from "../../animations";
 
-const ModalLayout = ({ condition, className, children }) => {
+const ModalLayout = ({ condition, className, children, close }) => {
 	return (
 		<AnimatePresence>
 			{condition && (
-				<motion.div className="modal" {...opacity}>
+				<motion.div
+					onClick={(event) => {
+						if (!event.target.closest(".modal__content")) close();
+					}}
+					className="modal"
+					{...opacity}
+				>
 					<div className="modal__body">
 						<motion.div {...slide} className={`modal__content${className ? ` ${className}` : ""}`}>
 							{children}
