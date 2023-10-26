@@ -37,6 +37,8 @@ const Content = () => {
 
 	const [fetching, setFetching] = useState(false);
 
+	const dispatch = useDispatch();
+
 	const removeRoom = () => {
 		setFetching(true);
 		api("GET").then((response) => {
@@ -58,12 +60,18 @@ const Content = () => {
 
 			console.log(body.boards[0].rooms[0]); // HOT_FIXES: если надо будет всё-таки делать проекты отдельные, то вот это меняй
 			api("PUT", body).then(() => {
-				setActiveRoom(body.boards[0].rooms[0].name);
-				setBoards(body.boards);
+				dispatch(setActiveRoom(body.boards[0].rooms[0].name));
+				dispatch(setBoards(body.boards));
 				setFetching(false);
 			});
 		});
 	};
+
+	const [roomName, setRoomName] = useState(activeRoom);
+
+	useEffect(() => {
+		setRoomName(activeRoom);
+	}, [activeRoom]);
 
 	return (
 		<>
@@ -74,16 +82,59 @@ const Content = () => {
 					</motion.div>
 				)}
 			</AnimatePresence>
-			{role === "admin" && board.rooms.length > 1 ? (
+			{role === "admin" ? (
 				<div className="board__room">
-					<div className="board__roomhead">
+					<form
+						onSubmit={(event) => {
+							event.preventDefault();
+
+							api("GET")
+								.then((response) => {
+									const result = response.record;
+									return result;
+								})
+								.then((response) => {
+									dispatch(setActiveRoom(roomName));
+
+									const body = {
+										...response,
+										boards: response.boards.map((board) => {
+											if (board.name === activeProject) {
+												return {
+													...board,
+													rooms: board.rooms.map((room) => {
+														if (room.name === activeRoom) {
+															return { ...room, name: roomName };
+														}
+														return room;
+													}),
+												};
+											}
+											return board;
+										}),
+									};
+
+									dispatch(setBoards(body.boards));
+
+									api("PUT", body).then(() => console.log("Название команты изменено успешно!"));
+								});
+						}}
+						className="board__roomhead"
+					>
 						<h3 className="board__roomnamesub">Текущая комната: </h3>
-						<h2 className="board__roomname">{activeRoom}</h2>
-					</div>
-					<button onClick={removeRoom} className="button board__remove">
-						<DeleteIcon />
-						<span>Удалить комнату</span>
-					</button>
+						<input
+							type="text"
+							className="board__roomname"
+							value={roomName}
+							onChange={(event) => setRoomName(event.target.value)}
+						/>
+					</form>
+					{board.rooms.length > 1 && (
+						<button onClick={removeRoom} className="button board__remove">
+							<DeleteIcon />
+							<span>Удалить комнату</span>
+						</button>
+					)}
 				</div>
 			) : null}
 			<div className="board__content">
@@ -213,7 +264,7 @@ const Task = ({ room, data, task, setSend }) => {
 
 	return (
 		<li
-			className={`board-task board-task_${task.priority}`}
+			className={`board-task board-task_${task.priority} board-task_${task.weight}`}
 			onClick={(event) => {
 				if (!event.target.closest(".board-task-datepicker")) setDeadlineActive(false);
 				if (!event.target.closest(".board-task-more-content, .board-task__more")) setMoreActive(false);
@@ -398,8 +449,17 @@ const Task = ({ room, data, task, setSend }) => {
 						</button>
 					</div>
 				) : null}
-				{task.executors ? <div className="board-task__executors">{task.executors.join(", ")}</div> : null}
+				{task.executors.length > 0 ? <div className="board-task__executors">{task.executors.join(", ")}</div> : null}
 			</div>
+			{task.categories.length > 0 ? (
+				<div className="board-task__categories">
+					{task.categories.map((category, index) => (
+						<li className="board-task__category" key={index}>
+							{category}
+						</li>
+					))}
+				</div>
+			) : null}
 		</li>
 	);
 };

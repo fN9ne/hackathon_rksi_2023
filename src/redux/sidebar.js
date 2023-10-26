@@ -23,7 +23,7 @@ const sidebarSlice = createSlice({
 		setActiveRoom(state, action) {
 			state.activeRoom = action.payload;
 		},
-		closeAll(state) {
+		closeAllSidebar(state) {
 			return {
 				...state,
 				projects: false,
@@ -33,5 +33,6 @@ const sidebarSlice = createSlice({
 	},
 });
 
-export const { setProjectTabVisibility, setRoomsTabVisibility, setActiveProject, setActiveRoom, closeAll } = sidebarSlice.actions;
+export const { setProjectTabVisibility, setRoomsTabVisibility, setActiveProject, setActiveRoom, closeAllSidebar } =
+	sidebarSlice.actions;
 export default sidebarSlice.reducer;

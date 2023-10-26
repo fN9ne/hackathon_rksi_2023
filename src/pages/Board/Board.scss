@@ -6,7 +6,8 @@
 
 	&__room {
 		display: flex;
-		gap: 44px;
+		flex-direction: column;
+		gap: 24px;
 		margin: 0 0 32px 0;
 	}
 
@@ -20,11 +21,15 @@
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+		width: 100%;
 	}
 
 	&__roomname {
 		color: #fff;
 		font-size: 44px;
+		max-width: 100%;
+		width: 100%;
+		background-color: transparent;
 	}
 
 	&__container {
@@ -68,7 +73,7 @@
 	}
 
 	&__remove {
-		align-self: flex-end;
+		align-self: flex-start;
 		display: flex;
 		align-items: center;
 		gap: 8px;
@@ -111,32 +116,37 @@
 		border: 2px solid transparent;
 
 		&_todo,
-		&_high {
+		&_high,
+		&_big {
 			background-color: #F64949;
 			border-color: #B52828;
 			box-shadow: 0px 0px 10px 0px rgba(255, 0, 0, 0.25);
 		}
 
-		&_fix {
+		&_fix,
+		&_good {
 			background-color: #F69C49;
 			border-color: #BC6E26;
 			box-shadow: 0px 0px 10px 0px rgba(255, 107, 0, 0.25);
 		}
 
 		&_progress,
-		&_medium {
+		&_medium,
+		&_small {
 			background-color: #FBFF32;
 			border-color: #A1A41A;
 			box-shadow: 0px 0px 10px 0px rgba(219, 255, 0, 0.25);
 		}
 
-		&_complete {
+		&_complete,
+		&_biggest {
 			background-color: #9BFE79;
 			border-color: #3E9420;
 			box-shadow: 0px 0px 10px 0px rgba(66, 255, 0, 0.25);
 		}
 
-		&_low {
+		&_low,
+		&_tiny {
 			background-color: #ffffff;
 			border-color: #777777;
 			box-shadow: 0px 0px 10px 0px rgba(131, 131, 131, 0.25);
@@ -251,27 +261,59 @@
 	cursor: pointer;
 	transition: 350ms;
 
+	&__categories {
+		margin: 16px 0 0 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		row-gap: 6px;
+	}
+
+	&__category {
+		color: #fff;
+		font-size: 12px;
+	}
+
 	&__executors {
 		color: #fff;
 		font-size: 12px;
 	}
 
 	&_high {
-		border-color: $red;
+		border-left-color: $red;
 	}
 
 	&_low {
-		border-color: #cecece;
+		border-left-color: #cecece;
 	}
 
 	&_medium {
-		border-color: #FBFF32;
+		border-left-color: #FBFF32;
+	}
+
+	&_biggest {
+		border-right-color: #9BFE79;
+	}
+
+	&_big {
+		border-right-color: $red;
+	}
+
+	&_good {
+		border-right-color: #F69C49;
+	}
+
+	&_small {
+		border-right-color: #FBFF32;
+	}
+
+	&_tiny {
+		border-right-color: #cecece;
 	}
 
 	&:hover {
 		@media #{$mouse-device} {
-			border-color: #989aa9;
-			background-color: rgba(84, 86, 96, 0.8);
+			background-color: rgba(84, 86, 96, 0.6);
 		}
 	}
 
@@ -326,6 +368,7 @@
 	}
 
 	&__footer {
+		margin: 20px 0 0 0;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -399,14 +442,46 @@
 	}
 
 	&__body {
-		width: 240px;
-		position: relative;
+		width: 300px;
+		position: absolute;
+		left: 50%;
+		translate: -25% 0;
 		z-index: 1;
 	}
 
 	.react-calendar {
 		position: absolute;
 		translate: 0 35px;
+		background-color: $black;
+		color: #fff;
+
+		button {
+			color: inherit;
+
+			&:hover {
+				@media #{$mouse-device} {
+					color: $black;
+				}
+			}
+
+			&.react-calendar__tile--now {
+				background-color: $red;
+			}
+
+			&.react-calendar__month-view__days__day--weekend {
+				color: $red;
+			}
+
+			&.react-calendar__month-view__days__day--neighboringMonth {
+				color: $gray;
+
+				&:hover {
+					@media #{$mouse-device} {
+						color: $black;
+					}
+				}
+			}
+		}
 	}
 }
 

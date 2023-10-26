@@ -52,12 +52,50 @@
 .task-modal {
 	border-radius: 25px;
 	max-width: 100%;
-	min-height: 400px;
+	min-height: 720px;
 	width: 65%;
 	border: 2px solid #AEB2C6;
 	padding: 0;
 	flex-direction: row;
 	align-items: stretch;
+
+	&__heading {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+	}
+
+	&__categories {
+		display: flex;
+		gap: 12px;
+
+		li {
+			padding: 10px 12px;
+			border-radius: 4px;
+			color: rgba(255, 255, 255, 0.25);
+			transition: 350ms;
+			cursor: pointer;
+
+			&.active {
+				background-color: rgba(255, 255, 255, 0.25);
+				color: rgba(255, 255, 255, 0.75);
+
+				&:hover {
+					@media #{$mouse-device} {
+						color: #fff;
+						scale: 0.95;
+					}
+				}
+			}
+
+			&:hover {
+				@media #{$mouse-device} {
+					background-color: rgba(255, 255, 255, 0.25);
+					color: rgba(255, 255, 255, 0.75);
+				}
+			}
+		}
+	}
 
 	.loader {
 		width: 100%;
@@ -93,7 +131,7 @@
 
 		display: flex;
 		flex-direction: column;
-		gap: 32px;
+		gap: 64px;
 	}
 
 	&__status {
@@ -104,17 +142,30 @@
 
 	&__name {
 		margin: 16px 0 0 0;
-		line-height: 40px;
-		height: 80px;
-		font-size: 32px;
+		line-height: 32px;
+		height: 98px;
+		font-size: 26px;
 		font-weight: 600;
 		color: #fff;
 	}
 
+	&__general {
+		flex: 1 1 auto;
+		padding: 0 0 20px 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__top {
+		display: flex;
+		flex: 1 1 auto;
+	}
+
 	&__desc {
+		margin: 12px 0 0 0;
 		font-size: 20px;
 		line-height: calc(28/20);
-		height: 84px;
+		height: 112px;
 		color: rgba(255, 255, 255, 0.75);
 
 		&::placeholder {
@@ -122,10 +173,28 @@
 		}
 	}
 
+	.counter {
+		color: #acacac;
+		margin: 8px 0 0 0;
+		text-align: right;
+	}
+
 	textarea {
 		width: 100%;
 		resize: none;
 		background-color: transparent;
+		padding: 0 20px 0 0;
+		border-bottom: 1px solid #fff;
+
+		&::-webkit-scrollbar {
+			width: 4px;
+			background-color: $black;
+			border: 1px solid $gray;
+
+			&-thumb {
+				background-color: $red;
+			}
+		}
 	}
 
 	&__bottom {
@@ -148,15 +217,31 @@
 	}
 
 	.board-task-datepicker {
+		width: 150px;
+
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
+		text-align: right;
+
+		position: relative;
+
+		&::before {
+			content: 'Дедлайн:';
+			display: block;
+			color: $gray;
+			margin: 0 0 8px 0;
+		}
+
+		&__value {
+			color: #fff;
+		}
 
 		&__label {
 			width: auto;
 			border-radius: 0px;
 			border: 0;
 			display: flex;
+			justify-content: flex-end;
 			gap: 8px;
 
 			span {
@@ -300,6 +385,129 @@
 			@media #{$mouse-device} {
 				opacity: 0.75;
 				scale: 0.95;
+			}
+		}
+	}
+}
+
+.chat {
+	margin: 32px 0 0 0;
+	padding: 0 0 20px 0;
+	flex: 1 1 auto;
+	max-height: 202px;
+
+	&__track {
+		height: 100%;
+		overflow: auto;
+
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		padding: 12px 20px 12px 0;
+
+		margin: 0 0 20px 0;
+
+		&::-webkit-scrollbar {
+			width: 4px;
+			background-color: #1a1a1f;
+			border-radius: 2px;
+
+			&-thumb {
+				background-color: $red;
+				border-radius: 2px;
+			}
+		}
+	}
+
+	&__input {
+		width: 100%;
+		display: flex;
+
+		input {
+			flex: 1 1 auto;
+			height: 40px;
+			border: 1px solid $gray;
+			border-right: 0;
+			background-color: transparent;
+			color: #fff;
+			padding: 0 12px;
+
+			&::placeholder {
+				color: $gray;
+			}
+		}
+
+		button {
+			height: 40px;
+			padding: 0 12px;
+			border: 1px solid $gray;
+			background-color: #1a1a1f;
+			font-weight: 600;
+			color: #fff;
+			transition: 350ms;
+
+			&:hover {
+				@media #{$mouse-device} {
+					background-color: #26262c;
+				}
+			}
+		}
+	}
+}
+
+.chat-item {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	align-self: flex-start;
+	gap: 8px;
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		gap: 8px;
+		width: 100%;
+
+		div {
+			display: flex;
+			gap: 8px;
+		}
+	}
+
+	&__fio {
+		color: #bcdfff;
+	}
+
+	&__nick {
+		font-weight: 600;
+		color: #fff;
+	}
+
+	&__date {
+		color: $gray;
+	}
+
+	&__body {
+		padding: 10px 12px;
+		background-color: #43434b;
+		border-radius: 4px;
+		max-width: 450px;
+		color: #fff;
+		border: 1px solid $gray;
+	}
+
+	&_right {
+		width: 100%;
+		align-items: flex-end;
+
+		.chat-item {
+			&__body {
+				background-color: #313138;
+			}
+
+			&__header {
+				flex-direction: row-reverse;
+				width: auto;
 			}
 		}
 	}

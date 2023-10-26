@@ -1,4 +1,4 @@
-import { closeAll, setActiveProject, setActiveRoom } from "../../../redux/sidebar";
+import { closeAllSidebar, setActiveProject, setActiveRoom } from "../../../redux/sidebar";
 import TabContent from "./TabContent";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,7 +23,7 @@ const ProjectTab = () => {
 							onClick={() => {
 								dispatch(setActiveProject(board.name));
 								dispatch(setActiveRoom(board.rooms[0].name));
-								dispatch(closeAll());
+								dispatch(closeAllSidebar());
 							}}
 							key={index}
 							className={`tab-content__item${board.name === activeProject ? " tab-content__item_active" : ""}`}

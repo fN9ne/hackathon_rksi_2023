@@ -2,7 +2,7 @@ import "./Sidebar.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setLogOutVisibility } from "../../redux/modals";
-import { closeAll, setProjectTabVisibility, setRoomsTabVisibility } from "../../redux/sidebar";
+import { closeAllSidebar, setProjectTabVisibility, setRoomsTabVisibility } from "../../redux/sidebar";
 
 import LogoutIcon from "../../assets/icons/logout.svg?react";
 import ProjectIcon from "../../assets/icons/projects.svg?react";
@@ -22,12 +22,12 @@ const Sidebar = () => {
 	const sidebarState = useSelector((state) => state.sidebar);
 
 	const tabs = [
-		{
+		/* {
 			title: "Проект",
 			icon: <ProjectIcon />,
 			tag: "projects",
 			onClick: () => dispatch(setProjectTabVisibility(!sidebarState.projects)),
-		},
+		}, */
 		{ title: "Комнаты", icon: <RoomsIcon />, tag: "rooms", onClick: () => dispatch(setRoomsTabVisibility(!sidebarState.rooms)) },
 		{ title: "Панель администратора", icon: <AdminIcon />, admin: true, onClick: () => navigate("/app/admin") },
 	];
@@ -55,7 +55,7 @@ const Sidebar = () => {
 							title={tab.title}
 							key={index}
 							onClick={() => {
-								dispatch(closeAll());
+								dispatch(closeAllSidebar());
 								tab.onClick();
 							}}
 							className={`sidebar__tab ${isTabActive(tab, sidebarState[tab.tag])}`}

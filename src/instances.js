@@ -39,6 +39,9 @@ export const task = ({
 	creator,
 	priority = "medium",
 	executors = [],
+	weight = "good",
+	categories = [],
+	chat = [],
 }) => {
 	return {
 		status: status,
@@ -50,5 +53,8 @@ export const task = ({
 		creator: creator,
 		priority: priority,
 		executors: executors,
+		weight: weight,
+		categories: categories,
+		chat: chat,
 	};
 };
