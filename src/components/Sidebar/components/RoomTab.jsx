@@ -11,6 +11,7 @@ import { room } from "../../../instances";
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "../../Loader/Loader";
 import { opacity } from "../../../animations";
+import { useNavigate } from "react-router-dom";
 
 const RoomTab = () => {
 	const { rooms, activeRoom, activeProject } = useSelector((state) => state.sidebar);
@@ -115,6 +116,7 @@ const Item = ({ room, activeRoom }) => {
 	const [value, setValue] = useState(room.name);
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const { activeProject } = useSelector((state) => state.sidebar);
 
@@ -124,6 +126,7 @@ const Item = ({ room, activeRoom }) => {
 			onClick={() => {
 				dispatch(setActiveRoom(room.name));
 				dispatch(closeAllSidebar());
+				navigate("/app/board");
 			}}
 		>
 			<div className="tab-content__item_text">{room.name}</div>

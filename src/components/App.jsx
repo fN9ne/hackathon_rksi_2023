@@ -20,6 +20,8 @@ import { setData, setSave } from "../redux/board";
 import Test from "../pages/Test";
 import Appointment from "./Mails/Appointment";
 import { setAppointment, setAppointmentSending } from "../redux/mailer";
+import Admin from "../pages/Admin/Admin";
+import Auth from "./Mails/Auth";
 
 const App = () => {
 	const location = useLocation();
@@ -105,7 +107,7 @@ const App = () => {
 		if (ftUser) {
 			dispatch(setUser(JSON.parse(ftUser)));
 		} else {
-			// navigate("/");
+			navigate("/");
 		}
 
 		api("GET").then((response) => {
@@ -134,11 +136,13 @@ const App = () => {
 					))}
 					<Route path="app" element={<AppLayout />}>
 						<Route path="board" element={<Board />} />
+						<Route path="admin" element={<Admin />} />
 					</Route>
 					<Route path="/test" element={<Test />} />
 				</Routes>
 			</AnimatePresence>
 			<LogOut />
+			<Auth />
 			<Appointment />
 		</>
 	);

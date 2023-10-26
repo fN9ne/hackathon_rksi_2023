@@ -62,7 +62,15 @@ const LogIn = ({}) => {
 	}, [username, password]);
 
 	return (
-		<WindowLayout fetching={fetching} onSubmit={sendForm} error={error} isFormValid={isFormValid} title="Вход" text={text}>
+		<WindowLayout
+			success=""
+			fetching={fetching}
+			onSubmit={sendForm}
+			error={error}
+			isFormValid={isFormValid}
+			title="Вход"
+			text={text}
+		>
 			<Input value={username} onChange={setUsername} type="text" placeholder=" Юзернейм" />
 			<Input value={password} onChange={setPassword} type="password" placeholder=" Пароль" />
 		</WindowLayout>

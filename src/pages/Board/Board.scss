@@ -33,7 +33,7 @@
 	}
 
 	&__container {
-		padding: 24px;
+		padding: 24px 24px 190px 24px;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
@@ -59,7 +59,7 @@
 	}
 
 	&__content {
-		flex: 1 1 auto;
+		height: 100%;
 		display: flex;
 		gap: 12px;
 	}
@@ -95,6 +95,8 @@
 
 .board-column {
 	flex: 0 0 calc(25% - 9px);
+	display: flex;
+	flex-direction: column;
 
 	&__header {
 		display: flex;
@@ -207,6 +209,17 @@
 		height: 100%;
 
 		transition: 350ms;
+
+		overflow: auto;
+
+		&::-webkit-scrollbar {
+			width: 4px;
+			background-color: #252429;
+
+			&-thumb {
+				background-color: $red;
+			}
+		}
 
 		&:hover {
 			@media #{$mouse-device} {

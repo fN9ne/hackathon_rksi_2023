@@ -1,0 +1,95 @@
+@import '../../scss/vars';
+
+.admin {
+	height: 100%;
+
+	&__container {
+		padding: 36px 24px;
+		display: flex;
+		gap: 32px;
+		height: 100%;
+	}
+
+	&__col {
+		&_1 {
+			flex: 0 0 calc(40% - 8px);
+		}
+
+		&_2 {
+			flex: 0 0 calc(25% - 16px);
+		}
+
+		&_3 {
+			flex: 0 0 calc(35% - 8px);
+		}
+	}
+
+	&__users {
+		background-color: #25262b;
+		flex: 1 1 auto;
+		border-radius: 8px;
+		padding: 56px 32px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 12px;
+		overflow: auto;
+	}
+
+	&__user {
+		border: 1px solid #fff;
+		border-radius: 6px;
+		padding: 12px 14px;
+		display: flex;
+		align-items: center;
+		background-color: rgba(255, 255, 255, 0.05);
+	}
+
+	&__fio {
+		font-weight: 600;
+		color: #bcdfff;
+		font-size: 16px;
+		flex: 0 0 200px;
+	}
+
+	&__username {
+		color: #fff;
+		font-size: 16px;
+		flex: 0 0 140px;
+	}
+
+	&__email {
+		color: $gray;
+		flex: 1 1 auto;
+		text-align: right;
+	}
+
+	.auth {
+		max-width: 420px;
+		align-self: center;
+
+		&__title {
+			line-height: 1.25;
+		}
+
+		.input {
+			width: 100%;
+		}
+	}
+}
+
+.chart {
+	&-wrapper {
+		padding: 28px 32px 24px 32px;
+		border-radius: 5px;
+		background-color: #25262b;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	&-title {
+		color: #fff;
+		font-size: 24px;
+	}
+}

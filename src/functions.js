@@ -27,3 +27,15 @@ export const date = (date = new Date(), increase = false, time = false) => {
 
 	return `${date.getDate() + (increase ? 1 : 0)} ${getMonthName(date.getMonth() + 1)}${time ? `, ${hours}:${minutes}` : ""}`;
 };
+
+export const genereatePassword = () => {
+	const ascii = "abcdefghijklmnopqrstuvwxyz0123456789_,-.";
+
+	let result = "";
+
+	for (let i = 0; i < 16; i++) {
+		result += ascii[Math.floor(Math.random() * ascii.length)];
+	}
+
+	return result;
+};
