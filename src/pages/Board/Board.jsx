@@ -25,12 +25,6 @@ const Board = () => {
 		}
 	}, [boards, activeProject, activeRoom]);
 
-	useEffect(() => {
-		if (Object.entries(data).length > 0) {
-			// console.log("Board changed!");
-		}
-	}, [data]);
-
 	return (
 		<div className="board">
 			<TaskModal task={task} />

@@ -68,7 +68,11 @@ const App = () => {
 
 			const { oldExecutors, newExecutors } = compareArrays(oldData, allTasks);
 
-			if (oldData.length > 0 && oldExecutors[0].executors.length < newExecutors[0].executors.length) {
+			if (
+				oldData.length > 0 &&
+				oldExecutors.length !== 0 &&
+				oldExecutors[0].executors.length < newExecutors[0].executors.length
+			) {
 				const executor = newExecutors[0].executors.filter((item) => !oldExecutors[0].executors.includes(item));
 				const task_name = newExecutors[0].name;
 				const deadline = newExecutors[0].deadline ? newExecutors[0].deadline : "Не установлен";

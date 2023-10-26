@@ -5,8 +5,6 @@ const Test = () => {
 	const sendForm = (event) => {
 		event.preventDefault();
 
-		console.log(event.target);
-
 		emailjs.sendForm("service_i9x3duj", "template_8bqxx4a", event.target, "lqCwNVvKUG13eZx6e");
 	};
 

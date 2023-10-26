@@ -58,7 +58,6 @@ const Content = () => {
 				}),
 			};
 
-			console.log(body.boards[0].rooms[0]); // HOT_FIXES: если надо будет всё-таки делать проекты отдельные, то вот это меняй
 			api("PUT", body).then(() => {
 				dispatch(setActiveRoom(body.boards[0].rooms[0].name));
 				dispatch(setBoards(body.boards));
@@ -115,7 +114,7 @@ const Content = () => {
 
 								dispatch(setBoards(body.boards));
 
-								api("PUT", body).then(() => console.log("Название команты изменено успешно!"));
+								api("PUT", body).then(() => console.log("Название комнаты изменено успешно!"));
 							});
 					}}
 					className="board__roomhead"
