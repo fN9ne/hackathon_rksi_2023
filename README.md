@@ -1,5 +1,21 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=Хакатон+РКСИ+2023)](https://git.io/typing-svg)
 
+# Данные для «ПОЩУПАТЬ»
+```js
+const users = [
+  {
+    // аккаунт С правами администратора
+    login: "admin",
+    password: "test",
+  },
+  {
+    // аккаунт Без прав администратора
+    login: "executor",
+    password: "test"
+  }
+]
+```
+
 ![S9uad logo](/public/s9uadlogo.svg)
 
 ### :man_technologist: В разработке использовались:
